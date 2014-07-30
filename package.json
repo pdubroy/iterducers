@@ -1,0 +1,26 @@
+{
+  "name": "iterducers",
+  "version": "0.1.0",
+  "author": "Patrick Dubroy <pdubroy@gmail.com> (http://dubroy.com)",
+  "license": "MIT",
+  "main": "main.js",
+  "dependencies": {},
+  "devDependencies": {
+    "browserify": "^5.9.1",
+    "jshint": "^2.5.2",
+    "tape": "^2.13.4",
+    "watchify": "^1.0.1"
+  },
+  "scripts": {
+    "init-repo": "mkdir bin dist lib third_party; git remote rm origin; npm init && git reset --soft ceac6c && git add . && git commit --amend -m 'Initial commit.'",
+    "build": "browserify -s iterducers -o dist/iterducers-bundle.js main.js",
+    "watch": "watchify -s iterducers -o dist/iterducers-bundle.js main.js",
+    "test": "tape test/*.js",
+    "prepublish": "npm run build && npm run test && npm run lint",
+    "lint": "jshint *.js lib/*.js test/*.js"
+  },
+  "description": "Tranducers defined in terms of the ES6 iterator protocol.",
+  "directories": {
+    "test": "test"
+  }
+}
