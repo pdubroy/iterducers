@@ -3,23 +3,24 @@
   "version": "0.1.0",
   "author": "Patrick Dubroy <pdubroy@gmail.com> (http://dubroy.com)",
   "license": "MIT",
-  "main": "main.js",
-  "dependencies": {},
+  "main": "index.js",
+  "dependencies": {
+    "es6ify": "^1.3.0"
+  },
   "devDependencies": {
     "browserify": "^5.9.1",
     "jshint": "^2.5.2",
-    "tape": "^2.13.4",
-    "watchify": "^1.0.1"
+    "tape": "^2.13.4"
   },
   "scripts": {
     "init-repo": "mkdir bin dist lib third_party; git remote rm origin; npm init && git reset --soft ceac6c && git add . && git commit --amend -m 'Initial commit.'",
-    "build": "browserify -s iterducers -o dist/iterducers-bundle.js main.js",
-    "watch": "watchify -s iterducers -o dist/iterducers-bundle.js main.js",
+    "build": "browserify -t es6ify -s iterducers -o dist/iterducers-bundle.js index.js",
+    "watch": "watchify -t es6ify -s iterducers -o dist/iterducers-bundle.js index.js",
     "test": "tape test/*.js",
     "prepublish": "npm run build && npm run test && npm run lint",
     "lint": "jshint *.js lib/*.js test/*.js"
   },
-  "description": "Tranducers defined in terms of the ES6 iterator protocol.",
+  "description": "An attempt to understand tranducers by implementing them in a more JavaScript-y way.",
   "directories": {
     "test": "test"
   }
